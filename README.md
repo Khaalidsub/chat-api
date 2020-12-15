@@ -3,6 +3,8 @@
 It has been already preconfigured and does not require any adjustment.
 
 ```
+yarn install
+
 docker-compose up -d
 ```
 
