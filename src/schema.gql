@@ -1,0 +1,97 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+}
+
+type Chat {
+  id: ID!
+  ChatName: String!
+  description: String!
+  users: [User!]!
+}
+
+type Message {
+  chat: Chat!
+  message: String!
+  sender: User!
+}
+
+input ChatUser {
+  id: ID!
+  username: String!
+  email: String!
+}
+
+type Query {
+  chats: [Chat!]!
+  users: [User!]!
+  user(id: String!): User!
+  currentUser: User!
+  messages: [Message!]!
+  message(id: String!): Message!
+}
+
+type Mutation {
+  createChat(createChatInput: CreateChatInput!): Chat!
+  updateChat(updateChatInput: UpdateChatInput!): Chat!
+  removeChat(id: String!): Chat!
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  loginUser(username: String!, email: String!): String!
+  sendMessage(createMessageInput: CreateMessageInput!): Message!
+  updateMessage(updateMessageInput: UpdateMessageInput!): Message!
+  removeMessage(id: String!): Message!
+}
+
+input CreateChatInput {
+  """Chat Name"""
+  ChatName: String!
+
+  """Description of the chat"""
+  description: String!
+  users: [String!]!
+}
+
+input UpdateChatInput {
+  """Chat Name"""
+  ChatName: String
+
+  """Description of the chat"""
+  description: String
+  users: [String!]
+  id: ID!
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+}
+
+input UpdateUserInput {
+  username: String
+  email: String
+  id: ID!
+}
+
+input CreateMessageInput {
+  chat: String!
+  message: String!
+  sender: String!
+}
+
+input UpdateMessageInput {
+  chat: String!
+  message: String!
+  id: ID!
+  sender: ChatUser!
+}
+
+type Subscription {
+  messageAdded: Message!
+}
