@@ -7,8 +7,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MessagesModule } from './messages/messages.module';
-
-import { autoPopulateAllFields } from './utils';
+import { autoPopulateAllFields } from 'mongoose-autopopulator';
+// import { autoPopulateAllFields } from 'mongoose-autopopulator';
 
 @Module({
   imports: [
@@ -28,12 +28,11 @@ import { autoPopulateAllFields } from './utils';
       {
         connectionFactory: (connection) => {
           connection.plugin(autoPopulateAllFields);
-          // console.log(connection.plugin(require('mongoose-autopopulate')));
 
           return connection;
         },
       },
-    ), //! not working , needs to be checked
+    ),
 
     ChatModule,
     UsersModule,
